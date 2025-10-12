@@ -1,4 +1,5 @@
 import Banner from "../Section/Home/Banner";
+import Catagory from "../Section/Home/Catagory";
 import Stat from "../Section/Home/Stat";
 
 const Home = () => {
@@ -12,6 +13,9 @@ const Home = () => {
       <div className="my-10">
         <Stat></Stat>
       </div>
+
+      {/* category section */}
+      <Catagory></Catagory>
     </div>
   );
 };
