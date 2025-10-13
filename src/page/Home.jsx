@@ -1,6 +1,7 @@
 import Banner from "../Section/Home/Banner";
 import Catagory from "../Section/Home/Catagory";
 import Stat from "../Section/Home/Stat";
+import Works from "../Section/Home/Works";
 
 const Home = () => {
   return (
@@ -16,6 +17,10 @@ const Home = () => {
 
       {/* category section */}
       <Catagory></Catagory>
+
+      {/* how we works section */}
+
+      <Works></Works>
     </div>
   );
 };

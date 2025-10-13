@@ -23,7 +23,7 @@ const Catagory = () => {
       <div className="lg:w-[1380px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {categorys.map((category) => (
           <button >
-            <div className="flex justify-between m-3 rounded-xl  gap-10 border-2 p-5  items-center hover:bg-[#ff545d] hover:text-white">
+            <div className="flex cursor-pointer justify-between m-3 rounded-xl  gap-10 border-2 p-5  items-center hover:bg-[#ff545d] hover:text-white">
               <span>
                 <FaLanguage size={30}/>
               </span>
