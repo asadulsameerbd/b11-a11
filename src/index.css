@@ -6,3 +6,7 @@
 body {
   font-family: poppins;
 }
+
+.active {
+  color: #ecf0f1;
+}

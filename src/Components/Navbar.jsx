@@ -4,11 +4,14 @@ const Navbar = () => {
   const menu = (
     <>
       <div className="flex gap-8 font-lg">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/">Find Tutors</NavLink>
-        <NavLink to="/">Add Tutorials</NavLink>
-        <NavLink to="/">My Tutorials</NavLink>
-        <NavLink to="/">My Booked Tutors</NavLink>
+        <NavLink className="relative after:content-[''] after:absolute after:left-0 after:-bottom-2 after:h-[2px] after:w-0 after:bg-[#EB3B5A] after:transition-all after:duration-500 md:hover:after:w-full" to="/">
+        <span></span>
+         Home
+         </NavLink>
+        <NavLink className="relative after:content-[''] after:absolute after:w-0  after:left-0 after:h-[2px] after:-bottom-2 after:bg-[#EB3B5A] md:hover:after:w-full after:transition-all after:duration-500" to="/">Find Tutors</NavLink>
+        <NavLink className="relative after:content-[''] after:absolute after:w-0  after:left-0 after:h-[2px] after:-bottom-2 after:bg-[#EB3B5A] md:hover:after:w-full after:transition-all after:duration-500" to="/">Add Tutorials</NavLink>
+        <NavLink className="relative after:content-[''] after:absolute after:w-0  after:left-0 after:h-[2px] after:-bottom-2 after:bg-[#EB3B5A] md:hover:after:w-full after:transition-all after:duration-500" to="/">My Tutorials</NavLink>
+        <NavLink className="relative after:content-[''] after:absolute after:w-0  after:left-0 after:h-[2px] after:-bottom-2 after:bg-[#EB3B5A] md:hover:after:w-full after:transition-all after:duration-500" to="/">My Booked Tutors</NavLink>
       </div>
     </>
   );

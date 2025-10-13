@@ -35,9 +35,7 @@ const Banner = () => {
             <p className="py-5 text-sm sm:text-base md:text-lg text-gray-100">
               Find the perfect tutors for your favourite language
             </p>
-            <button className="btn btn-primary text-sm sm:text-base">
-              Get Started
-            </button>
+            <button className="btn"> Get Started</button>
           </div>
         </div>
       </div>
