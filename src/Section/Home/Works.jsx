@@ -6,12 +6,12 @@ import icon from '../../assets/practice.png';
 const Works = () => {
   return (
     <div className="lg:w-[1380px] mx-auto">
-      <h1 className="text-4xl font-semibold py-10 mt-10">How We Works</h1>
+      <h1 className="text-4xl font-semibold text-center lg:text-left py-10 mt-10">How We Works</h1>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 m-10'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-5'>
 
         {/* card1 */}
-        <div className="card bg-base-100 w-96 shadow-sm">
+        <div className="card lg:m-4 bg-base-100 w-full lg:w-96 shadow-sm">
           <div className="card-body">
             <span className="card-title font-bold p-2">1</span>
             <h1 className="text-2xl font-semibold">Find Your Tutor</h1>
@@ -24,7 +24,7 @@ const Works = () => {
           </figure>
         </div>
         {/* card2 */}
-        <div className="card border-2 bg-base-100 w-96 shadow-sm">
+        <div className="card lg:m-4 border-2 bg-base-100 w-full lg:w-96 shadow-sm">
           <div className="card-body">
             <span className="card-title font-bold p-2">2</span>
             <h1 className="text-2xl font-semibold">Start learning</h1>
@@ -37,7 +37,7 @@ const Works = () => {
           </figure>
         </div>
         {/* card3 */}
-        <div className="card  bg-base-100 w-96 shadow-sm ">
+        <div className="card lg:lg:m-4 bg-base-100 w-full lg:w-96 shadow-sm ">
           <div className="card-body">
             <span className="card-title font-bold p-2">3</span>
             <h1 className="text-2xl font-semibold">Practice</h1>

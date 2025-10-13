@@ -1,5 +1,6 @@
 import Banner from "../Section/Home/Banner";
 import Catagory from "../Section/Home/Catagory";
+import Faq from "../Section/Home/Faq";
 import Stat from "../Section/Home/Stat";
 import Works from "../Section/Home/Works";
 
@@ -21,6 +22,10 @@ const Home = () => {
       {/* how we works section */}
 
       <Works></Works>
+
+      {/* Faq section  */}
+
+      <Faq></Faq>
     </div>
   );
 };

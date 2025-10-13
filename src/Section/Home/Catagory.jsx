@@ -16,7 +16,7 @@ const Catagory = () => {
   return (
     <div>
       <div className="lg:w-[1380px] mx-auto">
-        <h1 className="text-4xl font-bold py-13">
+        <h1 className="text-3xl lg:text-4xl font-bold  py-13">
           Discover the perfect Tutor for your Learning journey
         </h1>
       </div>
