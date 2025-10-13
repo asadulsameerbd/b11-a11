@@ -1,26 +1,55 @@
+import Lottie from 'lottie-react';
+import learning from '../../assets/Learning.json';
+import tutor from '../../assets/Online Classes.json';
+import icon from '../../assets/practice.png';
+
 const Works = () => {
   return (
     <div className="lg:w-[1380px] mx-auto">
       <h1 className="text-4xl font-semibold py-10 mt-10">How We Works</h1>
 
-      <div>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 m-10'>
 
         {/* card1 */}
         <div className="card bg-base-100 w-96 shadow-sm">
           <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
+            <span className="card-title font-bold p-2">1</span>
+            <h1 className="text-2xl font-semibold">Find Your Tutor</h1>
             <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
+              We will connect you with a tutor who will motivate , challenge and inspiration you.
             </p>
           </div>
           <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
+            <Lottie animationData={tutor} className='w-60'  loop={true}></Lottie>
           </figure>
         </div>
+        {/* card2 */}
+        <div className="card border-2 bg-base-100 w-96 shadow-sm">
+          <div className="card-body">
+            <span className="card-title font-bold p-2">2</span>
+            <h1 className="text-2xl font-semibold">Start learning</h1>
+            <p>
+              your mentor will lead you thought your first steps and assist you in mapping out your learning journey ahead.
+            </p>
+          </div>
+          <figure>
+            <Lottie animationData={learning} className='w-60' loop={true}></Lottie>
+          </figure>
+        </div>
+        {/* card3 */}
+        <div className="card  bg-base-100 w-96 shadow-sm ">
+          <div className="card-body">
+            <span className="card-title font-bold p-2">3</span>
+            <h1 className="text-2xl font-semibold">Practice</h1>
+            <p>
+              Practice your project. practice makes a men perfect.
+            </p>
+          </div>
+          <figure className='flex items-center justify-center '>
+            <img className='w-50 p-5' src={icon}  alt="" />
+          </figure>
+        </div>
+        
       </div>
     </div>
   );
