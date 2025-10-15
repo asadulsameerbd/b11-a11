@@ -1,5 +1,6 @@
 import { FaLanguage } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa6";
+import { useNavigate } from "react-router";
 const categorys = [
   { id: 1, name: "English", image: "/images/english" },
   { id: 2, name: "Bangla", image: "/images/english" },
@@ -13,6 +14,15 @@ const categorys = [
 ];
 
 const Catagory = () => {
+
+  const navigate = useNavigate()
+
+  // btn
+
+  const handleClick = (language) =>{
+    navigate(`/find-tutors?language=${language}`)
+  }
+ 
   return (
     <div>
       <div className="lg:w-[1380px] mx-auto">
@@ -22,10 +32,10 @@ const Catagory = () => {
       </div>
       <div className="lg:w-[1380px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {categorys.map((category) => (
-          <button >
+          <button key={category.id} onClick={()=>handleClick(category.name)}>
             <div className="flex cursor-pointer justify-between m-3 rounded-xl  gap-10 border-2 p-5  items-center hover:bg-[#ff545d] hover:text-white">
               <span>
-                <FaLanguage size={30}/>
+                <FaLanguage size={30} />
               </span>
               <span>
                 <p>{category.name}</p>

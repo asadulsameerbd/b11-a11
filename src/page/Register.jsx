@@ -1,12 +1,11 @@
+import { updateProfile } from "firebase/auth";
 import { use } from "react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthProvider";
 
-
-
 const Register = () => {
-  const {createUser} = use(AuthContext)
+  const { createUser } = use(AuthContext);
 
   // handle Submit button
 
@@ -15,16 +14,19 @@ const Register = () => {
 
     const form = e.target;
     const formdata = new FormData(form);
-    const { email, password, ...loginData } = Object.fromEntries(
+    const { email, password, name, photourl } = Object.fromEntries(
       formdata.entries()
     );
-    console.log(loginData);
-
     createUser(email, password)
       .then((result) => {
-        console.log(result);
+        return updateProfile(result.user, {
+          displayName: name,
+          photoURL: photourl,
+        });
+      })
+      .then(() => {
         Swal.fire({
-          title: `User is created Successfully`,
+          title: `User created Successfully`,
           icon: "success",
           draggable: true,
         });

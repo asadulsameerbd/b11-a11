@@ -113,26 +113,31 @@ const Navbar = () => {
         <div className="navbar-end">
           {user ? (
             // profile
-            <div className="mx-5">
-              <div onClick={() => setOpen(!open)} className="relative avatar cursor-pointer">
-                <div className="relative w-12 rounded-full">
+            <div className="mx-5 relative flex items-center gap-2">
+              <div
+                onClick={() => setOpen(!open)}
+                className="avatar cursor-pointer relative group"
+              >
+                <div className="w-12 rounded-full">
                   <img
                     src={
                       user.photoURL ||
                       "https://img.daisyui.com/images/profile/demo/batperson@192.webp"
                     }
+                    alt="Profile"
                   />
-                </div>
-                {/* Tooltip */}
-                <div className="absolute w-full left-1/2 -translate-x-1/2 bg-gray-800 text-white text-sm px-3 py-1 rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300">
-                  {user.displayName || "User"}
+                  {/* Display name hover */}
+                  <span className="absolute top-12 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    {user.displayName || "User"}
+                  </span>
                 </div>
 
+                {/* Logout button */}
                 {open && (
-                  <div className="absolute top-15 right-5  flex flex-col">
+                  <div className="absolute top-18 right-0 flex flex-col">
                     <button
                       onClick={handleLogout}
-                      className="btn  px-2 bg-[#eb3b5a] btn-secondary"
+                      className="btn px-2 bg-[#eb3b5a] btn-secondary"
                     >
                       Logout
                     </button>
@@ -141,6 +146,7 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
+            // Login/Register buttons
             <div className="flex gap-5">
               <NavLink
                 to="/login"

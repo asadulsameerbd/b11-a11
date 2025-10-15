@@ -1,7 +1,11 @@
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layout/MainLayout";
+import AddTutorials from "../page/AddTutorials";
+import BookedTutorials from "../page/BookedTutorials";
+import FindTutorials from "../page/FindTutorials";
 import Home from "../page/Home";
 import Login from "../page/Login";
+import MyTutorialsPage from "../page/MyTutorialsPage";
 import Register from "../page/Register";
 
 export const router = createBrowserRouter([
@@ -23,19 +27,19 @@ export const router = createBrowserRouter([
       },
       {
         path : '/find-tutors',
-        Component : Login,
+        Component : FindTutorials,
       },
       {
         path : '/add-tutorials',
-        Component : Login,
+        Component : AddTutorials,
       },
       {
         path : '/my-tutorials',
-        Component : Login,
+        Component : MyTutorialsPage,
       },
       {
         path : '/booked-tutors',
-        Component : Login,
+        Component : BookedTutorials,
       },
     ],
   },
