@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthProvider";
 
 const AddTutorials = () => {
@@ -16,19 +17,40 @@ const AddTutorials = () => {
       description: form.description.value,
       rating: form.rating.value,
     };
-    console.log("Submitting tutorial:", tutorial);
-    
+
+    fetch("http://localhost:3000/addtutors", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(tutorial),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Tutorial added Successfully",
+            icon: "success",
+            draggable: true,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
-    <div className="min-h-screen bg-base-200 py-10">
+    <div className="py-20">
       <h1 className="text-center font-semibold text-xl md:text-3xl lg:text-4xl mb-8">
         Add Tutorials Page
       </h1>
-      <div className="card bg-base-100 w-[90%] md:w-[800px] lg:w-[1100px] mx-auto shadow-xl">
+      <div className="card bg-[#D36F74] w-[90%] md:w-[800px] lg:w-[1100px] mx-auto shadow-xl">
         <div className="card-body p-8">
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
             {/* Left column */}
             <div className="space-y-4">
               <div>
@@ -119,12 +141,11 @@ const AddTutorials = () => {
               </div>
 
               <div className="mt-6">
-                <button type="submit" className="btn btn-neutral w-full">
+                <button type="submit" className="btn bg-[#eb3b5a] text-white border border-black w-full">
                   Add Tutorial
                 </button>
               </div>
             </div>
-
           </form>
         </div>
       </div>

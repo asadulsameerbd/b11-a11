@@ -1,13 +1,23 @@
-import { useSearchParams } from "react-router";
+import { BsStarFill } from "react-icons/bs";
+import { IoMdSchool } from "react-icons/io";
+import { Link, useLoaderData, useSearchParams } from "react-router";
 
 const FindTutorials = () => {
-    const [searchParam] = useSearchParams()
-    const language = searchParam.get('language')
+  const tutors = useLoaderData();
+
+  const [searchParam] = useSearchParams();
+  const language = searchParam.get("language");
+
+  const filteredDatas = language
+    ? tutors.filter(
+        (tutor) => tutor.language.toLowerCase() === language.toLowerCase()
+      )
+    : tutors;
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full min-h-screen bg-white">
       {/* Title */}
-      <h1 className="text-center font-semibold text-xl md:text-4xl py-10">
+      <h1 className="text-center font-semibold text-2xl md:text-4xl py-10 px-4">
         Explore Online Tutors & Teachers for Learning a New Language
       </h1>
 
@@ -40,8 +50,83 @@ const FindTutorials = () => {
       </div>
 
       {/* Content Section */}
-      <div className="w-full px-5 md:px-10 lg:px-20">
-        
+      <div className="w-full lg:w-[900px] mx-auto px-4 md:px-10 lg:px-20">
+        {filteredDatas.length > 0 ? (
+          <div className="flex flex-col gap-8">
+            {filteredDatas.map((filterdata) => (
+              <div
+                key={filterdata._id}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center border border-gray-200 shadow-md rounded-xl p-5 hover:shadow-lg transition duration-300"
+              >
+                {/* Image */}
+                <div className="flex justify-center md:justify-start">
+                  <img
+                    className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border"
+                    src={filterdata.image}
+                    alt={filterdata.name}
+                  />
+                </div>
+
+                {/* Middle Section */}
+                <div className="text-center md:text-left flex flex-col gap-2">
+                  <h1 className="font-bold text-xl md:text-2xl">
+                    {filterdata.name}
+                  </h1>
+                  <div className="flex justify-center md:justify-start">
+                    <div className="badge badge-sm badge-secondary">
+                      Super Tutor
+                    </div>
+                  </div>
+                  <div className="flex justify-center md:justify-start items-center gap-2 text-gray-600">
+                    <IoMdSchool className="text-lg" />
+                    <span className="font-medium">{filterdata.language}</span>
+                  </div>
+                  <p className="text-gray-500 text-sm md:text-base">
+                    {filterdata.description?.slice(0, 100)}...
+                  </p>
+                </div>
+
+                {/* Right Section */}
+                <div className="flex flex-col justify-center items-center md:items-end gap-4">
+                  <div className="flex justify-between w-full md:w-auto gap-6">
+                    <span className="flex flex-col items-center">
+                      <span className="flex items-center gap-1">
+                        <BsStarFill className="text-yellow-500" />
+                        <span className="font-bold">{filterdata.rating}</span>
+                      </span>
+                      <p className="text-gray-500 text-sm">Reviews</p>
+                    </span>
+
+                    <span className="text-right">
+                      <h1 className="font-bold text-lg">
+                        BDT {filterdata.price}
+                      </h1>
+                      <p className="text-gray-500 text-sm">
+                        50 min lesson
+                      </p>
+                    </span>
+                  </div>
+
+                  <button className="btn bg-[#eb3b5a] hover:bg-[#d7334e] text-white rounded-lg px-4 py-2 transition">
+                    Book Trial Lesson
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="lg:flex justify-center items-center gap-5 rounded-2xl bg-pink-100 p-10 text-center">
+            <p className="text-gray-600 font-medium">
+              ❌ No Tutors/Tutorials found. Please add a tutor from here —
+            </p>
+            <Link
+              to="/add-tutorials"
+              className="btn bg-[#eb3b5a] text-white ml-3 rounded-lg px-4 py-2"
+            >
+              Add Tutorial
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

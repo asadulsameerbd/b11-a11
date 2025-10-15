@@ -28,6 +28,7 @@ export const router = createBrowserRouter([
       {
         path : '/find-tutors',
         Component : FindTutorials,
+        loader : ()=> fetch("http://localhost:3000/addtutors")
       },
       {
         path : '/add-tutorials',
