@@ -1,22 +1,27 @@
+import { useState } from "react";
 import { BsStarFill } from "react-icons/bs";
 import { IoMdSchool } from "react-icons/io";
 import { Link, useLoaderData, useSearchParams } from "react-router";
 
 const FindTutorials = () => {
   const tutors = useLoaderData();
+  const [search, setSearch] = useState("");
+  const [searchParams] = useSearchParams();
+  const language = searchParams.get("language");
 
-  const [searchParam] = useSearchParams();
-  const language = searchParam.get("language");
-
-  const filteredDatas = language
-    ? tutors.filter(
-        (tutor) => tutor.language.toLowerCase() === language.toLowerCase()
-      )
-    : tutors;
+  // filtered data 
+  const filteredDatas = tutors.filter((tutor) => {
+    const matchSearch = tutor.language
+      .toLowerCase()
+      .includes(search.toLowerCase());
+    const matchLanguage = language
+      ? tutor.language.toLowerCase() === language.toLowerCase()
+      : true;
+    return matchSearch && matchLanguage;
+  });
 
   return (
     <div className="w-full min-h-screen bg-white">
-      {/* Title */}
       <h1 className="text-center font-semibold text-2xl md:text-4xl py-10 px-4">
         Explore Online Tutors & Teachers for Learning a New Language
       </h1>
@@ -42,7 +47,8 @@ const FindTutorials = () => {
           </svg>
           <input
             type="search"
-            required
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Search your favorite language tutor..."
             className="w-full outline-none bg-transparent"
           />
@@ -58,7 +64,6 @@ const FindTutorials = () => {
                 key={filterdata._id}
                 className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center border border-gray-200 shadow-md rounded-xl p-5 hover:shadow-lg transition duration-300"
               >
-                {/* Image */}
                 <div className="flex justify-center md:justify-start">
                   <img
                     className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border"
@@ -66,8 +71,6 @@ const FindTutorials = () => {
                     alt={filterdata.name}
                   />
                 </div>
-
-                {/* Middle Section */}
                 <div className="text-center md:text-left flex flex-col gap-2">
                   <h1 className="font-bold text-xl md:text-2xl">
                     {filterdata.name}
@@ -85,8 +88,6 @@ const FindTutorials = () => {
                     {filterdata.description?.slice(0, 100)}...
                   </p>
                 </div>
-
-                {/* Right Section */}
                 <div className="flex flex-col justify-center items-center md:items-end gap-4">
                   <div className="flex justify-between w-full md:w-auto gap-6">
                     <span className="flex flex-col items-center">
@@ -101,13 +102,11 @@ const FindTutorials = () => {
                       <h1 className="font-bold text-lg">
                         BDT {filterdata.price}
                       </h1>
-                      <p className="text-gray-500 text-sm">
-                        50 min lesson
-                      </p>
+                      <p className="text-gray-500 text-sm">50 min lesson</p>
                     </span>
                   </div>
 
-                  <button className="btn bg-[#eb3b5a] hover:bg-[#d7334e] text-white rounded-lg px-4 py-2 transition">
+                  <button onClick={()=>handleBooked()} className="btn bg-[#eb3b5a] hover:bg-[#d7334e] text-white rounded-lg px-4 py-2 transition">
                     Book Trial Lesson
                   </button>
                 </div>

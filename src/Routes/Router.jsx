@@ -7,6 +7,7 @@ import Home from "../page/Home";
 import Login from "../page/Login";
 import MyTutorialsPage from "../page/MyTutorialsPage";
 import Register from "../page/Register";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -18,29 +19,41 @@ export const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path : '/login',
-        Component : Login,
+        path: "/login",
+        Component: Login,
       },
       {
-        path : '/register',
-        Component : Register,
+        path: "/register",
+        Component: Register,
       },
       {
-        path : '/find-tutors',
-        Component : FindTutorials,
-        loader : ()=> fetch("http://localhost:3000/addtutors")
+        path: "/find-tutors",
+        Component: FindTutorials,
+        loader: () => fetch("http://localhost:3000/addtutors"),
       },
       {
-        path : '/add-tutorials',
-        Component : AddTutorials,
+        path: "/add-tutorials",
+        element: (
+          <PrivateRoutes>
+            <AddTutorials></AddTutorials>
+          </PrivateRoutes>
+        ),
       },
       {
-        path : '/my-tutorials',
-        Component : MyTutorialsPage,
+        path: "/my-tutorials",
+        element: (
+          <PrivateRoutes>
+            <MyTutorialsPage></MyTutorialsPage>
+          </PrivateRoutes>
+        ),
       },
       {
-        path : '/booked-tutors',
-        Component : BookedTutorials,
+        path: "/booked-tutors",
+        element: (
+          <PrivateRoutes>
+            <BookedTutorials></BookedTutorials>
+          </PrivateRoutes>
+        ),
       },
     ],
   },

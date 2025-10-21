@@ -1,10 +1,13 @@
   import { use } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthProvider";
 
   const Login = () => {
     const { signinUser } = use(AuthContext);
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/" 
+    const navigate = useNavigate()
 
     // submit btn
 
@@ -23,6 +26,7 @@ import { AuthContext } from "../context/AuthProvider";
             draggable: true,
           });
           e.target.reset()
+          navigate(from, {replace : true})
         })
         .catch((error) => {
           console.log(error);
