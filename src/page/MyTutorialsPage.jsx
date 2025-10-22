@@ -19,7 +19,7 @@ const MyTutorialsPage = () => {
 
   return (
     <div>
-      <div className="flex h-[80vh] justify-center flex-col gap-8 m-10">
+      <div className="flex h-[80vh] flex-col gap-8 m-10">
         {tutorials.length > 0 ? (
           tutorials.map((tutorial) => (
             <div

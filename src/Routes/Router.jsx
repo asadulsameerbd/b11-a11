@@ -7,6 +7,7 @@ import Home from "../page/Home";
 import Login from "../page/Login";
 import MyTutorialsPage from "../page/MyTutorialsPage";
 import Register from "../page/Register";
+import TutorDetails from "../page/TutorDetails";
 import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
@@ -32,6 +33,16 @@ export const router = createBrowserRouter([
         loader: () => fetch("http://localhost:3000/addtutors"),
       },
       {
+        path: "/tutorDetails/:id",
+        element: (
+          <PrivateRoutes>
+            <TutorDetails></TutorDetails>
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/tutorDetails/${params.id}`),
+      },
+      {
         path: "/add-tutorials",
         element: (
           <PrivateRoutes>
@@ -53,7 +64,7 @@ export const router = createBrowserRouter([
           <PrivateRoutes>
             <BookedTutorials></BookedTutorials>
           </PrivateRoutes>
-        ),
+        )
       },
     ],
   },

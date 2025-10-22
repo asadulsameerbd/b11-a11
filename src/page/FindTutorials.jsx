@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { BsStarFill } from "react-icons/bs";
-import { IoMdSchool } from "react-icons/io";
+import { IoIosStar, IoIosStarHalf } from "react-icons/io";
 import { Link, useLoaderData, useSearchParams } from "react-router";
 
 const FindTutorials = () => {
@@ -9,7 +8,7 @@ const FindTutorials = () => {
   const [searchParams] = useSearchParams();
   const language = searchParams.get("language");
 
-  // filtered data 
+  // filtered data
   const filteredDatas = tutors.filter((tutor) => {
     const matchSearch = tutor.language
       .toLowerCase()
@@ -58,57 +57,38 @@ const FindTutorials = () => {
       {/* Content Section */}
       <div className="w-full lg:w-[900px] mx-auto px-4 md:px-10 lg:px-20">
         {filteredDatas.length > 0 ? (
-          <div className="flex flex-col gap-8">
-            {filteredDatas.map((filterdata) => (
-              <div
-                key={filterdata._id}
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center border border-gray-200 shadow-md rounded-xl p-5 hover:shadow-lg transition duration-300"
-              >
-                <div className="flex justify-center md:justify-start">
-                  <img
-                    className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border"
-                    src={filterdata.image}
-                    alt={filterdata.name}
-                  />
-                </div>
-                <div className="text-center md:text-left flex flex-col gap-2">
-                  <h1 className="font-bold text-xl md:text-2xl">
-                    {filterdata.name}
-                  </h1>
-                  <div className="flex justify-center md:justify-start">
-                    <div className="badge badge-sm badge-secondary">
-                      Super Tutor
-                    </div>
-                  </div>
-                  <div className="flex justify-center md:justify-start items-center gap-2 text-gray-600">
-                    <IoMdSchool className="text-lg" />
-                    <span className="font-medium">{filterdata.language}</span>
-                  </div>
-                  <p className="text-gray-500 text-sm md:text-base">
-                    {filterdata.description?.slice(0, 100)}...
+          <div>
+            {filteredDatas.map((filteredData) => (
+              <div key={filteredData._id} className="card card-side m-10 border border-[#D36F74] bg-base-100 shadow-sm">
+                <figure>
+                  <img className="w-45" src={filteredData.image} alt="Movie" />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title">
+                    <span>Name: </span>
+                    {filteredData.name}
+                  </h2>
+                  <h2 className="card-title">
+                    <span>Rating: </span>
+                    {filteredData.rating}{" "}
+                    {filteredData.rating > 4.5 ? (
+                      <IoIosStar className="text-yellow-400" />
+                    ) : (
+                      <IoIosStarHalf className="text-yellow-400" />
+                    )}
+                  </h2>
+                  <p>
+                    <b>Language:</b> {filteredData.language}
                   </p>
-                </div>
-                <div className="flex flex-col justify-center items-center md:items-end gap-4">
-                  <div className="flex justify-between w-full md:w-auto gap-6">
-                    <span className="flex flex-col items-center">
-                      <span className="flex items-center gap-1">
-                        <BsStarFill className="text-yellow-500" />
-                        <span className="font-bold">{filterdata.rating}</span>
-                      </span>
-                      <p className="text-gray-500 text-sm">Reviews</p>
-                    </span>
-
-                    <span className="text-right">
-                      <h1 className="font-bold text-lg">
-                        BDT {filterdata.price}
-                      </h1>
-                      <p className="text-gray-500 text-sm">50 min lesson</p>
-                    </span>
+                  <p>{filteredData.description?.slice(0, 50)}...</p>
+                  <div className="card-actions justify-end">
+                    <Link
+                      to={`/tutorDetails/${filteredData._id}`}
+                      className="btn bg-[#eb3b5a] hover:bg-[#d7334e] text-white rounded-lg px-4 py-2 transition"
+                    >
+                      View Details
+                    </Link>
                   </div>
-
-                  <button onClick={()=>handleBooked()} className="btn bg-[#eb3b5a] hover:bg-[#d7334e] text-white rounded-lg px-4 py-2 transition">
-                    Book Trial Lesson
-                  </button>
                 </div>
               </div>
             ))}

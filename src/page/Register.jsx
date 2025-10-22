@@ -57,6 +57,7 @@ const Register = () => {
                     name="name"
                     className="input"
                     placeholder="Name"
+                    required
                   />
                   <label className="label">Email</label>
                   <input
@@ -64,6 +65,7 @@ const Register = () => {
                     name="email"
                     className="input"
                     placeholder="Email"
+                    required
                   />
                   <label className="label">Photo URl</label>
                   <input
@@ -71,6 +73,7 @@ const Register = () => {
                     name="photourl"
                     className="input"
                     placeholder="photo url"
+                    required
                   />
                   <label className="label">Password</label>
                   <input
@@ -78,6 +81,7 @@ const Register = () => {
                     className="input"
                     placeholder="Password"
                     name="password"
+                    required
                   />
 
                   <button className="btn btn-neutral mt-4">Login</button>
