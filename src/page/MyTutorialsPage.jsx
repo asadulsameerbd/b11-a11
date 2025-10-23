@@ -3,7 +3,7 @@ import { BsStarFill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 import { IoMdSchool } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
-import { Link } from "react-router"; // 
+import { Link } from "react-router";
 import { AuthContext } from "../context/AuthProvider";
 
 const MyTutorialsPage = () => {
@@ -19,7 +19,6 @@ const MyTutorialsPage = () => {
     }
   }, [user]);
 
-  // Delete button
   const handleDelete = (id) => {
     fetch(`http://localhost:3000/deleteTutor/${id}`, { method: "DELETE" })
       .then((res) => res.json())
@@ -31,16 +30,14 @@ const MyTutorialsPage = () => {
       .catch((err) => console.log(err));
   };
 
-  
-
   return (
-    <div className="min-h-screen p-4 md:p-10 bg-gray-50">
+    <div className="min-h-screen p-4 md:p-10 bg-base-100 text-base-content transition-colors duration-300">
       {tutorials.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {tutorials.map((tutorial) => (
             <div
               key={tutorial._id}
-              className="bg-white border border-gray-200 shadow-md rounded-xl p-5 flex flex-col md:flex-row gap-4 md:gap-6 hover:shadow-lg transition"
+              className="bg-base-200 border border-gray-300 shadow-md rounded-xl p-5 flex flex-col md:flex-row gap-4 md:gap-6 hover:shadow-lg transition"
             >
               {/* Tutor Image */}
               <div className="flex justify-center md:justify-start">
@@ -53,16 +50,16 @@ const MyTutorialsPage = () => {
 
               {/* Tutor Info */}
               <div className="flex-1 flex flex-col justify-between gap-2 text-center md:text-left">
-                <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+                <h2 className="text-xl md:text-2xl font-bold text-base-content">
                   {tutorial.name}
                 </h2>
                 <div className="flex justify-center md:justify-start mt-1 gap-2">
-                  <IoMdSchool className="text-lg text-gray-600" />
-                  <span className="font-medium text-gray-700">
+                  <IoMdSchool className="text-lg text-base-content/70" />
+                  <span className="font-medium text-base-content/80">
                     {tutorial.language}
                   </span>
                 </div>
-                <p className="text-gray-500 text-sm md:text-base mt-1">
+                <p className="text-base-content/70 text-sm md:text-base mt-1">
                   {tutorial.description?.slice(0, 100)}...
                 </p>
                 <div className="flex justify-center md:justify-start items-center gap-4 mt-2 flex-wrap">
@@ -70,7 +67,7 @@ const MyTutorialsPage = () => {
                     <BsStarFill className="text-yellow-500" />
                     <span className="font-bold">{tutorial.rating}</span>
                   </div>
-                  <span className="text-gray-500 text-sm">
+                  <span className="text-base-content/70 text-sm">
                     BDT {tutorial.price} - 50 min lesson
                   </span>
                 </div>
@@ -110,8 +107,8 @@ const MyTutorialsPage = () => {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col justify-center items-center gap-5 text-center p-5 bg-pink-100 rounded-xl">
-          <p className="text-gray-700 font-medium">
+        <div className="flex flex-col justify-center items-center gap-5 text-center p-5 bg-base-200 rounded-xl transition-colors duration-300">
+          <p className="text-base-content/80 font-medium">
             You haven't added any tutorials. Please add
           </p>
           <Link

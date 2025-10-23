@@ -1,6 +1,6 @@
 const Stat = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-white lg:w-[1380px] mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:w-[1380px] mx-auto">
       {/* start  1 */} 
       <div className="stats shadow m-5 bg-[#9170d381]">
         <div className="stat">
