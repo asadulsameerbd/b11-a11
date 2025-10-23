@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { IoIosStar, IoIosStarHalf } from "react-icons/io";
-import { MdDelete } from "react-icons/md";
 import { Link } from "react-router";
 import { AuthContext } from "../context/AuthProvider";
 
@@ -17,11 +16,20 @@ const BookedTutorials = () => {
     }
   }, [user]);
 
-  // Delete button
-  const handleDelete = (id) => {
-    // API call for delete can be added here
-    console.log("Delete tutorial with ID:", id);
-  };
+  // // Delete button
+  // const handleDelete = (id) => {
+   
+  //   fetch(`http://localhost:3000/deleteTutor/${id}`, {
+  //     method: "DELETE",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.deletedCount > 0) {
+  //         setTutorials((prev) => prev.filter((tutor) => tutor._id !== id));
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   return (
     <div className="min-h-screen p-4 md:p-10 bg-gray-50">
@@ -56,11 +64,7 @@ const BookedTutorials = () => {
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-gray-700 font-medium">Rating:</span>
                     <span className="flex items-center gap-1 text-yellow-400">
-                      {tutorial.rating > 4.5 ? (
-                        <IoIosStar />
-                      ) : (
-                        <IoIosStarHalf />
-                      )}
+                      {tutorial.rating > 4.5 ? <IoIosStar /> : <IoIosStarHalf />}
                       {tutorial.rating}
                     </span>
                   </div>
@@ -69,17 +73,12 @@ const BookedTutorials = () => {
                 {/* Buttons */}
                 <div className="mt-4 flex flex-col sm:flex-row md:flex-col justify-end gap-2">
                   <Link
-                    to={`/tutorDetails/${tutorial._id}`}
-                    className="btn bg-[#eb3b5a] hover:bg-[#d7334e] text-white rounded-lg px-4 py-2 transition text-sm md:text-base"
+                    to={`/tutorDetails/${tutorial.tutorId}`}
+                    className="btn bg-[#eb3b5a] hover:bg-[#d7334e] text-white rounded-lg px-4 py-2 transition"
                   >
                     View Details
                   </Link>
-                  <button
-                    onClick={() => handleDelete(tutorial._id)}
-                    className="btn bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 transition text-sm md:text-base flex items-center justify-center"
-                  >
-                    <MdDelete className="text-lg" />
-                  </button>
+                 
                 </div>
               </div>
             </div>

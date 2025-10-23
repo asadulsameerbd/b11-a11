@@ -46,13 +46,8 @@ const TutorDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === "Already Booked") {
-          Swal.fire({
-            title: "You have already booked this tutor!",
-            icon: "warning",
-            draggable: true,
-          });
-        } else if (data.insertedId) {
+        console.log(data);
+         if (data.insertedId) {
           Swal.fire({
             title: "Tutor booked successfully!",
             icon: "success",
@@ -60,9 +55,10 @@ const TutorDetails = () => {
           });
         } else {
           Swal.fire({
-            title: "Something went wrong!",
+            title: "Already Booked tutors!",
             icon: "error",
           });
+        
         }
       })
       .catch((err) => console.log(err));

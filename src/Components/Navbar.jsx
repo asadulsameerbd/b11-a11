@@ -1,21 +1,24 @@
 import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthProvider";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate()
 
   // logout
 
   const handleLogout = () => {
-    logout();
+    
     Swal.fire({
       title: "User Logout Successfully",
       icon: "success",
       draggable: true,
     });
+    logout();
+    navigate('/')
   };
 
   // menu

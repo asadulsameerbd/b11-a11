@@ -1,100 +1,127 @@
 import { useContext, useEffect, useState } from "react";
 import { BsStarFill } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
 import { IoMdSchool } from "react-icons/io";
-import { Link } from "react-router";
+import { MdDelete } from "react-icons/md";
+import { Link } from "react-router"; // 
 import { AuthContext } from "../context/AuthProvider";
 
 const MyTutorialsPage = () => {
   const { user } = useContext(AuthContext);
-
   const [tutorials, setTutorials] = useState([]);
 
   useEffect(() => {
     if (user?.email) {
       fetch(`http://localhost:3000/add-tutors?email=${user.email}`)
         .then((res) => res.json())
-        .then((data) => setTutorials(data));
+        .then((data) => setTutorials(data))
+        .catch((err) => console.log(err));
     }
   }, [user]);
 
+  // Delete button
+  const handleDelete = (id) => {
+    fetch(`http://localhost:3000/deleteTutor/${id}`, { method: "DELETE" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          setTutorials((prev) => prev.filter((t) => t._id.toString() !== id));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  
+
   return (
-    <div>
-      <div className="flex h-[80vh] flex-col gap-8 m-10">
-        {tutorials.length > 0 ? (
-          tutorials.map((tutorial) => (
+    <div className="min-h-screen p-4 md:p-10 bg-gray-50">
+      {tutorials.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tutorials.map((tutorial) => (
             <div
               key={tutorial._id}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center border border-gray-200 shadow-md rounded-xl p-5 hover:shadow-lg transition duration-300"
+              className="bg-white border border-gray-200 shadow-md rounded-xl p-5 flex flex-col md:flex-row gap-4 md:gap-6 hover:shadow-lg transition"
             >
+              {/* Tutor Image */}
               <div className="flex justify-center md:justify-start">
                 <img
-                  className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border"
                   src={tutorial.image}
                   alt={tutorial.name}
+                  className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border"
                 />
               </div>
-              <div className="text-center md:text-left flex flex-col gap-2">
-                <h1 className="font-bold text-xl md:text-2xl">
+
+              {/* Tutor Info */}
+              <div className="flex-1 flex flex-col justify-between gap-2 text-center md:text-left">
+                <h2 className="text-xl md:text-2xl font-bold text-gray-800">
                   {tutorial.name}
-                </h1>
-                <div className="flex justify-center md:justify-start">
-                  <div className="badge badge-sm badge-secondary">
-                    Super Tutor
-                  </div>
+                </h2>
+                <div className="flex justify-center md:justify-start mt-1 gap-2">
+                  <IoMdSchool className="text-lg text-gray-600" />
+                  <span className="font-medium text-gray-700">
+                    {tutorial.language}
+                  </span>
                 </div>
-                <div className="flex justify-center md:justify-start items-center gap-2 text-gray-600">
-                  <IoMdSchool className="text-lg" />
-                  <span className="font-medium">{tutorial.language}</span>
-                </div>
-                <p className="text-gray-500 text-sm md:text-base">
+                <p className="text-gray-500 text-sm md:text-base mt-1">
                   {tutorial.description?.slice(0, 100)}...
                 </p>
+                <div className="flex justify-center md:justify-start items-center gap-4 mt-2 flex-wrap">
+                  <div className="flex items-center gap-1">
+                    <BsStarFill className="text-yellow-500" />
+                    <span className="font-bold">{tutorial.rating}</span>
+                  </div>
+                  <span className="text-gray-500 text-sm">
+                    BDT {tutorial.price} - 50 min lesson
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col justify-center items-center md:items-end gap-4">
-                <div className="flex justify-between w-full md:w-auto gap-6">
-                  <span className="flex flex-col items-center">
-                    <span className="flex items-center gap-1">
-                      <BsStarFill className="text-yellow-500" />
-                      <span className="font-bold">{tutorial.rating}</span>
-                    </span>
-                    <p className="text-gray-500 text-sm">Reviews</p>
-                  </span>
 
-                  <span className="text-right">
-                    <h1 className="font-bold text-lg">BDT {tutorial.price}</h1>
-                    <p className="text-gray-500 text-sm">50 min lesson</p>
-                  </span>
+              {/* Actions */}
+              <div className="flex flex-col justify-center items-center md:items-end gap-2 mt-3 md:mt-0">
+                <div className="flex gap-2 flex-wrap">
+                  <button
+                    onClick={() => handleDelete(tutorial._id)}
+                    className="btn bg-red-500 hover:bg-red-600 text-white rounded-lg px-3 py-2 flex items-center justify-center"
+                  >
+                    <MdDelete className="text-lg" />
+                  </button>
+                  <Link
+                    to={`/update-tutors/${tutorial._id}`}
+                    className="btn bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-3 py-2 flex items-center justify-center"
+                  >
+                    <FaEdit className="text-lg" />
+                  </Link>
                 </div>
 
                 {user?.email === tutorial.email ? (
                   <button
                     disabled
-                    className="btn bg-gray-400 text-white rounded-lg px-4 py-2 transition cursor-not-allowed"
+                    className="btn bg-gray-400 text-white rounded-lg px-4 py-2 mt-2 cursor-not-allowed"
                   >
                     Book Trial Lesson
                   </button>
                 ) : (
-                  <button className="btn bg-[#eb3b5a] hover:bg-[#d7334e] text-white rounded-lg px-4 py-2 transition">
+                  <button className="btn bg-[#eb3b5a] hover:bg-[#d7334e] text-white rounded-lg px-4 py-2 mt-2">
                     Book Trial Lesson
                   </button>
                 )}
               </div>
             </div>
-          ))
-        ) : (
-          <div className="flex flex-col sm:flex-col md:flex-row lg:flex-row justify-center items-center gap-5 text-center md:text-left p-5 bg-pink-100 md:bg-white rounded-xl">
-            <p className="text-gray-700 font-medium">
-              You haven't added any tutorials. Please add
-            </p>
-            <Link
-              to={"/add-tutorials"}
-              className="btn bg-[#eb3b5a] hover:bg-[#d7334e] text-white rounded-lg px-4 py-2 transition"
-            >
-              Tutorials
-            </Link>
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col justify-center items-center gap-5 text-center p-5 bg-pink-100 rounded-xl">
+          <p className="text-gray-700 font-medium">
+            You haven't added any tutorials. Please add
+          </p>
+          <Link
+            to={"/add-tutorials"}
+            className="btn bg-[#eb3b5a] hover:bg-[#d7334e] text-white rounded-lg px-4 py-2"
+          >
+            Add Tutorials
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

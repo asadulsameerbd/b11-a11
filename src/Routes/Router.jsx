@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router";
+import Error from "../Components/Error";
 import MainLayout from "../Layout/MainLayout";
 import AddTutorials from "../page/AddTutorials";
 import BookedTutorials from "../page/BookedTutorials";
@@ -8,12 +9,14 @@ import Login from "../page/Login";
 import MyTutorialsPage from "../page/MyTutorialsPage";
 import Register from "../page/Register";
 import TutorDetails from "../page/TutorDetails";
+import UpdateTutors from "../page/UpdateTutors";
 import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
+    errorElement : <Error></Error>,
     children: [
       {
         index: true,
@@ -51,6 +54,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/update-tutors/:id",
+        element: (
+          <PrivateRoutes>
+            <UpdateTutors></UpdateTutors>
+          </PrivateRoutes>
+        ),
+      },
+      {
         path: "/my-tutorials",
         element: (
           <PrivateRoutes>
@@ -64,7 +75,7 @@ export const router = createBrowserRouter([
           <PrivateRoutes>
             <BookedTutorials></BookedTutorials>
           </PrivateRoutes>
-        )
+        ),
       },
     ],
   },
