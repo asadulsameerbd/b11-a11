@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -36,6 +37,17 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
       setUser(currentUser);
+
+      if(currentUser?.email){
+        const userEmail = {email : currentUser.email}
+        axios.post("http://localhost:3000/jwt",userEmail,  {withCredentials : true} )
+        .then(res=>{
+          console.log("auth ok :",res.data);
+        })
+        .catch(error=>{
+          console.log(error);
+        })
+      }
     });
 
     return () => unsubscribe();

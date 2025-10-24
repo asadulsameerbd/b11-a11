@@ -47,15 +47,9 @@ const BookedTutorials = () => {
                     {tutorial.description?.slice(0, 80)}...
                   </p>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className="text-base-content/80 font-medium">
-                      Rating:
-                    </span>
+                    <span className="text-base-content/80 font-medium">Rating:</span>
                     <span className="flex items-center gap-1 text-yellow-400">
-                      {tutorial.rating > 4.5 ? (
-                        <IoIosStar />
-                      ) : (
-                        <IoIosStarHalf />
-                      )}
+                      {tutorial.rating > 4.5 ? <IoIosStar /> : <IoIosStarHalf />}
                       {tutorial.rating}
                     </span>
                   </div>

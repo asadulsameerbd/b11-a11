@@ -9,8 +9,8 @@ const AddTutorials = () => {
     e.preventDefault();
     const form = e.target;
     const tutorial = {
-      name: user?.displayName,
-      email: user?.email,
+      name: user?.displayName || name,
+      email: user?.email || email,
       image: form.image.value,
       language: form.language.value,
       price: form.price.value,
@@ -57,8 +57,9 @@ const AddTutorials = () => {
                 <label className="label">Name</label>
                 <input
                   type="text"
+                  name="name"
                   defaultValue={user?.displayName || ""}
-                  readOnly
+                 
                   className="input input-bordered w-full"
                 />
               </div>
@@ -67,6 +68,7 @@ const AddTutorials = () => {
                 <label className="label">Email</label>
                 <input
                   type="email"
+                  name="email"
                   defaultValue={user?.email || ""}
                   readOnly
                   className="input input-bordered w-full"

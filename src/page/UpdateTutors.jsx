@@ -21,6 +21,7 @@ const UpdateTutors = () => {
 
     const form = e.target;
     const updatedTutor = {
+      name: form.name.value,
       image: form.image.value,
       language: form.language.value,
       price: form.price.value,
@@ -43,7 +44,7 @@ const UpdateTutors = () => {
             draggable: true,
           });
         } else {
-            Swal.fire({
+          Swal.fire({
             title: "Tutorial Already Updated",
             icon: "error",
             draggable: true,
@@ -71,8 +72,9 @@ const UpdateTutors = () => {
                   <label className="label">Name</label>
                   <input
                     type="text"
+                    name="name"
                     defaultValue={user?.displayName || ""}
-                    readOnly
+                    placeholder="Enter your name"
                     className="input input-bordered w-full cursor-not-allowed"
                   />
                 </div>

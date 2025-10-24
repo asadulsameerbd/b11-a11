@@ -12,7 +12,7 @@ const MyTutorialsPage = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/add-tutors?email=${user.email}`)
+      fetch(`http://localhost:3000/add-tutors?email=${user.email}`,{credentials:"include"})
         .then((res) => res.json())
         .then((data) => setTutorials(data))
         .catch((err) => console.log(err));

@@ -1,11 +1,12 @@
 import { updateProfile } from "firebase/auth";
 import { use } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthProvider";
 
 const Register = () => {
   const { createUser } = use(AuthContext);
+  const navigate = useNavigate()
 
   // handle Submit button
 
@@ -30,6 +31,8 @@ const Register = () => {
           icon: "success",
           draggable: true,
         });
+        e.target.reset()
+        navigate('/')
       })
       .catch((error) => {
         console.log(error);
