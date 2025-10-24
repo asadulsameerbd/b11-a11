@@ -4,8 +4,15 @@ import { useEffect, useState } from "react";
 const Stat = () => {
   const [tutors, setTutors] = useState([]);
   const [bookedTutors, setBookedTutors] = useState([]);
+  const [totalUser, setTotalUser] = useState(0);
 
   useEffect(() => {
+    // total users
+
+    axios
+      .get("http://localhost:3000/total-users")
+      .then((res) => setTotalUser(res.data.total))
+      .catch((error) => console.log("Total User error : ", error));
     // fetch all tutors
     axios
       .get("http://localhost:3000/addtutors")
@@ -14,7 +21,7 @@ const Stat = () => {
 
     // fetch booked tutors
     axios
-      .get("http://localhost:3000/bookedTutor", )
+      .get("http://localhost:3000/bookedTutor")
       .then((res) => setBookedTutors(res.data))
       .catch((error) => console.log("Error fetching booked tutors:", error));
   }, []);
@@ -48,9 +55,7 @@ const Stat = () => {
       {/* Total Users */}
       <div className="stats shadow m-5 bg-[#d3ab7081]">
         <div className="stat">
-          <div className="stat-value">
-            {new Set(bookedTutors.map((t) => t.bookedBy)).size}
-          </div>
+          <div className="stat-value">{totalUser}</div>
           <div className="stat-title">Total Users</div>
         </div>
       </div>
