@@ -1,23 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosStar, IoIosStarHalf } from "react-icons/io";
-import { Link, useLoaderData, useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
+import Loading from "../Components/Loading";
 
 const FindTutorials = () => {
-  const tutors = useLoaderData();
+  const [tutors, setTutors] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [searchParams] = useSearchParams();
   const language = searchParams.get("language");
 
-  // filtered data
+  // Fetch data using useEffect 
+  useEffect(() => {
+    fetch("https://b11-a11-server-black.vercel.app/addtutors")
+      .then((res) => res.json())
+      .then((data) => {
+        setTutors(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+
+  // filtered data 
   const filteredDatas = tutors.filter((tutor) => {
     const matchSearch = tutor.language
-      .toLowerCase()
+      ?.toLowerCase()
       .includes(search.toLowerCase());
+
     const matchLanguage = language
-      ? tutor.language.toLowerCase() === language.toLowerCase()
+      ? tutor.language?.toLowerCase() === language.toLowerCase()
       : true;
+
     return matchSearch && matchLanguage;
   });
+
+  if (loading) {
+    return <Loading></Loading>
+  }
 
   return (
     <div className="w-full min-h-screen bg-base-100 text-base-content">
@@ -28,22 +50,6 @@ const FindTutorials = () => {
       {/* Search Box */}
       <div className="flex justify-center pb-10 w-full">
         <label className="input w-[90%] md:w-[60%] lg:w-[40%] flex items-center gap-2 border border-gray-300 rounded-xl px-3 py-2 shadow-sm">
-          <svg
-            className="h-[1.2em] opacity-50"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <g
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth="2.5"
-              fill="none"
-              stroke="currentColor"
-            >
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.3-4.3"></path>
-            </g>
-          </svg>
           <input
             type="search"
             value={search}
@@ -101,7 +107,7 @@ const FindTutorials = () => {
         ) : (
           <div className="lg:flex justify-center items-center gap-5 rounded-2xl bg-pink-100 dark:bg-base-300 p-10 text-center">
             <p className="text-gray-600 dark:text-gray-500 font-medium">
-              ❌ No Tutors/Tutorials found. Please add a tutor from here —
+              ❌ No Tutors/Tutorials found. Please adjust your search —
             </p>
             <Link
               to="/add-tutorials"

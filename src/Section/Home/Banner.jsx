@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { Link } from "react-router";
 import banner from "../../assets/banner.jpg";
 
 const Banner = () => {
@@ -35,7 +36,7 @@ const Banner = () => {
             <p className="py-5 text-sm sm:text-base md:text-lg text-gray-100">
               Find the perfect tutors for your favourite language
             </p>
-            <button className="btn"> Get Started</button>
+            <Link to='/find-tutors' className="btn"> Get Started</Link>
           </div>
         </div>
       </div>
