@@ -100,7 +100,7 @@ const FindTutorials = () => {
           ))
         ) : (
           <div className="lg:flex justify-center items-center gap-5 rounded-2xl bg-pink-100 dark:bg-base-300 p-10 text-center">
-            <p className="text-gray-600 dark:text-gray-300 font-medium">
+            <p className="text-gray-600 dark:text-gray-500 font-medium">
               ❌ No Tutors/Tutorials found. Please add a tutor from here —
             </p>
             <Link

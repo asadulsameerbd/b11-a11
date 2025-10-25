@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
       {
         path: "/find-tutors",
         Component: FindTutorials,
-        loader: () => fetch("http://localhost:3000/addtutors"),
+        loader: () => fetch("https://b11-a11-server-black.vercel.app/addtutors"),
       },
       {
         path: "/tutorDetails/:id",
@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/tutorDetails/${params.id}`),
+          fetch(`https://b11-a11-server-black.vercel.app/tutorDetails/${params.id}`),
       },
       {
         path: "/add-tutorials",

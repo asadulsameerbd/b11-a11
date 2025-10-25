@@ -37,7 +37,7 @@ const TutorDetails = () => {
 
     // send data to backend
 
-    fetch(`http://localhost:3000/bookedTutor`, {
+    fetch(`https://b11-a11-server-black.vercel.app/bookedTutor`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

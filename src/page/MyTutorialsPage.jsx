@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { BsStarFill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
@@ -12,15 +13,17 @@ const MyTutorialsPage = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/add-tutors?email=${user.email}`,{credentials:"include"})
-        .then((res) => res.json())
-        .then((data) => setTutorials(data))
+      axios.get(`https://b11-a11-server-black.vercel.app/add-tutors?email=${user.email}`, {
+       withCredentials : true,
+      })
+        
+        .then((data) => setTutorials(data.data))
         .catch((err) => console.log(err));
     }
   }, [user]);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3000/deleteTutor/${id}`, { method: "DELETE" })
+    fetch(`https://b11-a11-server-black.vercel.app/deleteTutor/${id}`, { method: "DELETE",Credential : "include" })
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {

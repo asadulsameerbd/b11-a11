@@ -18,7 +18,7 @@ const AddTutorials = () => {
       rating: form.rating.value,
     };
 
-    fetch("http://localhost:3000/addtutors", {
+    fetch("https://b11-a11-server-black.vercel.app/addtutors", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -59,7 +59,6 @@ const AddTutorials = () => {
                   type="text"
                   name="name"
                   defaultValue={user?.displayName || ""}
-                 
                   className="input input-bordered w-full"
                 />
               </div>
@@ -143,7 +142,10 @@ const AddTutorials = () => {
               </div>
 
               <div className="mt-6">
-                <button type="submit" className="btn bg-[#eb3b5a] text-white border border-black w-full">
+                <button
+                  type="submit"
+                  className="btn bg-[#eb3b5a] text-white border border-black w-full"
+                >
                   Add Tutorial
                 </button>
               </div>

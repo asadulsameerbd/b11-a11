@@ -10,7 +10,7 @@ const UpdateTutors = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/update-tutor/${id}`)
+      fetch(`https://b11-a11-server-black.vercel.app/update-tutor/${id}`)
         .then((res) => res.json())
         .then((data) => setTutorsData(data));
     }
@@ -28,7 +28,7 @@ const UpdateTutors = () => {
       description: form.description.value,
     };
 
-    fetch(`http://localhost:3000/update-tutor/${id}`, {
+    fetch(`https://b11-a11-server-black.vercel.app/update-tutor/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
