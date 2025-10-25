@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import Error from "../Components/Error";
+import Loading from "../Components/Loading";
 import MainLayout from "../Layout/MainLayout";
 import AddTutorials from "../page/AddTutorials";
 import BookedTutorials from "../page/BookedTutorials";
@@ -16,7 +17,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
-    errorElement : <Error></Error>,
+    errorElement: <Error></Error>,
     children: [
       {
         index: true,
@@ -33,7 +34,9 @@ export const router = createBrowserRouter([
       {
         path: "/find-tutors",
         Component: FindTutorials,
-        loader: () => fetch("https://b11-a11-server-black.vercel.app/addtutors"),
+        loader: () =>
+          fetch("https://b11-a11-server-black.vercel.app/addtutors"),
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "/tutorDetails/:id",
@@ -43,7 +46,10 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`https://b11-a11-server-black.vercel.app/tutorDetails/${params.id}`),
+          fetch(
+            `https://b11-a11-server-black.vercel.app/tutorDetails/${params.id}`
+          ),
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "/add-tutorials",
