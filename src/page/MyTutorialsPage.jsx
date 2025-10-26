@@ -13,7 +13,7 @@ const MyTutorialsPage = () => {
 
   useEffect(() => {
     if (user?.email) {
-      axios.get(`https://b11-a11-server-black.vercel.app/add-tutors?email=${user.email}`, {
+      axios.get(`https://b11-a11-server-azure.vercel.app/add-tutors?email=${user.email}`, {
        withCredentials : true,
       })
         
@@ -23,7 +23,7 @@ const MyTutorialsPage = () => {
   }, [user]);
 
   const handleDelete = (id) => {
-    fetch(`https://b11-a11-server-black.vercel.app/deleteTutor/${id}`, { method: "DELETE",Credential : "include" })
+    fetch(`https://b11-a11-server-azure.vercel.app/deleteTutor/${id}`, { method: "DELETE",Credential : "include" })
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {

@@ -10,18 +10,18 @@ const Stat = () => {
     // total users
 
     axios
-      .get("https://b11-a11-server-black.vercel.app/total-users")
+      .get("https://b11-a11-server-azure.vercel.app/total-users")
       .then((res) => setTotalUser(res.data.total))
       .catch((error) => console.log("Total User error : ", error));
     // fetch all tutors
     axios
-      .get("https://b11-a11-server-black.vercel.app/addtutors")
+      .get("https://b11-a11-server-azure.vercel.app/addtutors")
       .then((res) => setTutors(res.data))
       .catch((error) => console.log("Error fetching tutors:", error));
 
     // fetch booked tutors
     axios
-      .get("https://b11-a11-server-black.vercel.app/bookedTutor")
+      .get("https://b11-a11-server-azure.vercel.app/bookedTutor")
       .then((res) => setBookedTutors(res.data))
       .catch((error) => console.log("Error fetching booked tutors:", error));
   }, []);

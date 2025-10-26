@@ -18,7 +18,7 @@ const AddTutorials = () => {
       rating: form.rating.value,
     };
 
-    fetch("https://b11-a11-server-black.vercel.app/addtutors", {
+    fetch("https://b11-a11-server-azure.vercel.app/addtutors", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -9,7 +9,7 @@ const BookedTutorials = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`https://b11-a11-server-black.vercel.app/bookedTutor?email=${user.email}`)
+      fetch(`https://b11-a11-server-azure.vercel.app/bookedTutor?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => setTutorials(data))
         .catch((err) => console.log(err));

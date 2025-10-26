@@ -12,7 +12,7 @@ const FindTutorials = () => {
 
   // Fetch data using useEffect 
   useEffect(() => {
-    fetch("https://b11-a11-server-black.vercel.app/addtutors")
+    fetch("https://b11-a11-server-azure.vercel.app/addtutors")
       .then((res) => res.json())
       .then((data) => {
         setTutors(data);

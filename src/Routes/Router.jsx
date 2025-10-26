@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://b11-a11-server-black.vercel.app/tutorDetails/${params.id}`
+            `https://b11-a11-server-azure.vercel.app/tutorDetails/${params.id}`
           ),
         hydrateFallbackElement: <Loading></Loading>,
       },
